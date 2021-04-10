@@ -1,0 +1,44 @@
+CC=gcc  -g -O2
+SRC = $(wildcard src/*.c)
+OBJ = obj/*.o obj/*.obj
+CPPFLAGS = -Iinclude
+LDFLAGS = -Llib -lm
+TARGET0 = 2Darrays
+TARGET1 = functions
+TARGET2 = gsl1
+TARGET3 = monthlyrain
+TARGET4 = rainstats
+TARGET5 = yearlyrain
+TARGETS = yearlyrain rainstats monthlyrain gsl1 functions 2Darrays
+all: $(TARGETS)
+obj/$(TARGET0).o: src/2Darrays.c
+	$(CC) -c   $< -o obj/2Darrays.o $(CPPFLAGS)
+$(TARGET0): obj/2Darrays.o
+	$(CC) -o 2Darrays $< $(LDFLAGS)
+obj/$(TARGET1).o: src/functions.c
+	$(CC) -c   $< -o obj/functions.o $(CPPFLAGS)
+$(TARGET1): obj/functions.o
+	$(CC) -o functions $< $(LDFLAGS)
+obj/$(TARGET2).o: src/gsl1.c
+	$(CC) -c   $< -o obj/gsl1.o $(CPPFLAGS)
+$(TARGET2): obj/gsl1.o
+	$(CC) -o gsl1 $< $(LDFLAGS)
+obj/$(TARGET3).o: src/monthlyrain.c
+	$(CC) -c   $< -o obj/monthlyrain.o $(CPPFLAGS)
+$(TARGET3): obj/monthlyrain.o
+	$(CC) -o monthlyrain $< $(LDFLAGS)
+obj/$(TARGET4).o: src/rainstats.c
+	$(CC) -c   $< -o obj/rainstats.o $(CPPFLAGS)
+$(TARGET4): obj/rainstats.o
+	$(CC) -o rainstats $< $(LDFLAGS)
+obj/$(TARGET5).o: src/yearlyrain.c
+	$(CC) -c   $< -o obj/yearlyrain.o $(CPPFLAGS)
+$(TARGET5): obj/yearlyrain.o obj/monthlyrain.o
+	$(CC) -o yearlyrain $< $(LDFLAGS)
+install: all
+	mv $(TARGETS) bin
+.PHONY: clean
+clean:
+	rm -f $(OBJ) $(TARGETS)
+distclean: clean
+	rm -f bin/* Makefile

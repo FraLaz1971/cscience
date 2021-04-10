@@ -1,0 +1,21 @@
+# cnumerics: simple examples on numerical operations in c language
+# by Francesco Lazzarotto fralaz1971@gmail.com
+# to configure on bash
+./configure
+#
+# to compile
+make
+# to execute
+# ./<program> arg1 arg2 ... argn
+# n can be = 0 , so in this case:
+# ./<program>
+# e.g.
+./in2cm 10
+# to install (mv all executable program files in the directory bin)
+# to remove generated files:
+make clean
+#
+./2Darrays < data3x3.dat
+#
+./rainstats < raindata.asc 3
+
